@@ -1,4 +1,5 @@
 #pragma once
+
 #include <raylib.h>
 #include <vector>
 
@@ -12,5 +13,10 @@ extern const Color cyan;
 extern const Color blue;
 extern const Color lightBlue;
 extern const Color darkBlue;
+extern const Color pink;
+extern const Color brown;
+extern const Color grey;
+extern const Color lightGreen;
+extern const Color magenta;
 
 std::vector<Color> GetCellColors();

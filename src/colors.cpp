@@ -10,8 +10,14 @@ const Color cyan = {21, 204, 209, 255};
 const Color blue = {13, 64, 216, 255};
 const Color lightBlue = {59, 85, 162, 255};
 const Color darkBlue = {44, 44, 127, 255};
+const Color pink = {255, 105, 180, 255};
+const Color brown = {139, 69, 19, 255};
+const Color grey = {128, 128, 128, 255};
+const Color lightGreen = {144, 238, 144, 255};
+const Color magenta = {255, 0, 255, 255};
 
 std::vector<Color> GetCellColors()
 {
-    return {darkGrey, green, red, orange, yellow, purple, cyan, blue};
+    return {darkGrey, green, red, orange, yellow, purple, cyan, blue, lightBlue, darkBlue,
+            pink, brown, grey, lightGreen, magenta};
 }

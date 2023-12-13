@@ -10,7 +10,7 @@ Game::Game()
     gameOver = false;
     score = 0;
     InitAudioDevice();
-    music = LoadMusicStream("Sounds/music.mp3");
+    music = LoadMusicStream("Sounds/background_music.mp3");
     PlayMusicStream(music);
     rotateSound = LoadSound("Sounds/rotate.mp3");
     clearSound = LoadSound("Sounds/clear.mp3");
@@ -81,6 +81,9 @@ void Game::HandleInput()
         break;
     case KEY_UP:
         RotateBlock();
+        break;
+    case KEY_ESCAPE:
+        exit(0);
         break;
     }
 }
