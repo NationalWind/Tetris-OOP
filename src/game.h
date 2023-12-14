@@ -25,6 +25,7 @@ private:
     void RotateBlock();
     void LockBlock();
     bool BlockFits();
+    void MoveBlockDownFast();
 
     void UpdateScore(int linesCleared, int moveDownPoints);
     Grid grid;
