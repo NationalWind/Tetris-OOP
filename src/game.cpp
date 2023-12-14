@@ -69,6 +69,10 @@ void Game::HandleInput()
     }
     switch (keyPressed)
     {
+    case KEY_SPACE:
+        MoveBlockDownFast();
+        break;
+
     case KEY_LEFT:
         MoveBlockLeft();
         break;
@@ -186,6 +190,23 @@ bool Game::BlockFits()
         }
     }
     return true;
+}
+
+void Game::MoveBlockDownFast()
+{
+    if (!gameOver)
+    {
+        // Move the block down rapidly
+        while (!IsBlockOutside() && BlockFits())
+        {
+            currentBlock.Move(1, 0);
+            UpdateScore(0, 2); // Increase the score more for rapid descent
+        }
+
+        // Move the block up by one to lock it in place
+        currentBlock.Move(-1, 0);
+        LockBlock();
+    }
 }
 
 void Game::Reset()
