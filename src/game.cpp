@@ -67,6 +67,7 @@ void Game::HandleInput()
         gameOver = false;
         Reset();
     }
+
     switch (keyPressed)
     {
     case KEY_LEFT:
@@ -77,11 +78,18 @@ void Game::HandleInput()
         break;
     case KEY_DOWN:
         MoveBlockDown();
-        UpdateScore(0, 1);
+        UpdateScore(0, 5);
         break;
     case KEY_UP:
         RotateBlock();
         break;
+    case KEY_SPACE: // Add case for space button
+    {
+        int p = -10;
+        MoveBlockToBottom(p); // Call the new function to move the block to the bottom
+        UpdateScore(0, p);
+        break;
+    }
     case KEY_ESCAPE:
         exit(0);
         break;
@@ -121,6 +129,24 @@ void Game::MoveBlockDown()
         {
             currentBlock.Move(-1, 0);
             LockBlock();
+        }
+    }
+}
+
+void Game::MoveBlockToBottom(int &movePoints)
+{
+    if (!gameOver)
+    {
+        while (true)
+        {
+            movePoints += 10;
+            currentBlock.Move(1, 0);
+            if (IsBlockOutside() || BlockFits() == false)
+            {
+                currentBlock.Move(-1, 0);
+                LockBlock();
+                break;
+            }
         }
     }
 }
@@ -194,6 +220,7 @@ void Game::Reset()
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    gameOver = false;
     score = 0;
 }
 
@@ -209,6 +236,9 @@ void Game::UpdateScore(int linesCleared, int moveDownPoints)
         break;
     case 3:
         score += 500;
+        break;
+    case 4:
+        score += 1000;
         break;
     default:
         break;
