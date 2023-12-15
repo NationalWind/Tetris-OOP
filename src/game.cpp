@@ -87,13 +87,6 @@ void Game::HandleInput()
     case KEY_UP:
         RotateBlock();
         break;
-    case KEY_SPACE: // Add case for space button
-    {
-        int p = -10;
-        MoveBlockToBottom(p); // Call the new function to move the block to the bottom
-        UpdateScore(0, p);
-        break;
-    }
     case KEY_ESCAPE:
         CloseWindow();
         break;
@@ -133,24 +126,6 @@ void Game::MoveBlockDown()
         {
             currentBlock.Move(-1, 0);
             LockBlock();
-        }
-    }
-}
-
-void Game::MoveBlockToBottom(int &movePoints)
-{
-    if (!gameOver)
-    {
-        while (true)
-        {
-            movePoints += 10;
-            currentBlock.Move(1, 0);
-            if (IsBlockOutside() || BlockFits() == false)
-            {
-                currentBlock.Move(-1, 0);
-                LockBlock();
-                break;
-            }
         }
     }
 }

@@ -32,7 +32,7 @@ void DrawMainMenu(Font font)
 
     // Press ESC to Exit box
     DrawRectangleRounded({10, 10, 200, 50}, 1, 10, PINK);
-    DrawTextEx(font, "Press ESC to Exit", {20, 20}, 25, 2, DARKGRAY);
+    DrawTextEx(font, "Press ESC to Exit", {20, 20}, 30, 2, DARKGRAY);
 
     // Play option
     DrawRectangleRounded({80, 230, 340, 80}, 1, 10, lightGreen);
@@ -44,14 +44,14 @@ void DrawMainMenu(Font font)
 
     // Instructions option
     DrawRectangleRounded({80, 430, 340, 80}, 1, 10, lightGreen);
-    DrawTextEx(font, "Press I for Instructions", {105, 445}, 45, 2, WHITE);
+    DrawTextEx(font, "Press I for Instructions", {100, 445}, 44, 2, WHITE);
 }
 
 void DrawCreditsMenu(Font font)
 {
     // Press ESC to Exit box
     DrawRectangleRounded({10, 10, 250, 50}, 1, 10, PINK);
-    DrawTextEx(font, "Press BACKSPACE to Return", {20, 20}, 25, 2, DARKGRAY);
+    DrawTextEx(font, "Press E to Return", {20, 20}, 35, 2, DARKGRAY);
 
     DrawTextEx(font, "Credits", {170, 80}, 70, 2, DARKBROWN);
 
@@ -73,39 +73,39 @@ void DrawInstructionsMenu(Font font)
 {
     // Press ESC to Exit box
     DrawRectangleRounded({10, 10, 250, 50}, 1, 10, PINK);
-    DrawTextEx(font, "Press BACKSPACE to Return", {30, 20}, 25, 2, DARKGRAY);
+    DrawTextEx(font, "Press E to Return", {30, 20}, 35, 2, DARKGRAY);
 
-    DrawTextEx(font, "Instructions", {120, 80}, 60, 2, DARKBROWN);
+    DrawTextEx(font, "Instructions", {140, 80}, 60, 2, DARKBROWN);
 
     // Draw arrow boxes
-    DrawRectangleRounded({180, 180, 60, 60}, 1, 10, lightGreen); // up arrow
+    DrawRectangleRounded({180, 180, 60, 60}, 1, 10, BLUE); // up arrow
     DrawLine(210, 180, 180, 210, WHITE);
     DrawLine(210, 180, 210, 240, WHITE);
     DrawLine(210, 180, 240, 210, WHITE);
-    DrawTextEx(font, "ROTATE BLOCK", {160, 160}, 25, 2, WHITE);
+    DrawTextEx(font, "ROTATE BLOCK", {160, 160}, 35, 2, RED);
 
-    DrawRectangleRounded({120, 260, 60, 60}, 1, 10, lightGreen); // left arrow
+    DrawRectangleRounded({120, 260, 60, 60}, 1, 10, BLUE); // left arrow
     DrawLine(120, 290, 150, 260, WHITE);
     DrawLine(120, 290, 210, 290, WHITE);
     DrawLine(120, 290, 150, 320, WHITE);
-    DrawTextEx(font, "MOVE LEFT", {20, 290}, 25, 2, WHITE);
+    DrawTextEx(font, "MOVE LEFT", {20, 290}, 35, 2, RED);
 
-    DrawRectangleRounded({240, 260, 60, 60}, 1, 10, lightGreen); // right arrow
+    DrawRectangleRounded({240, 260, 60, 60}, 1, 10, BLUE); // right arrow
     DrawLine(290, 290, 260, 260, WHITE);
     DrawLine(290, 290, 230, 290, WHITE);
     DrawLine(290, 290, 260, 320, WHITE);
-    DrawTextEx(font, "MOVE RIGHT", {300, 290}, 25, 2, WHITE);
+    DrawTextEx(font, "MOVE RIGHT", {300, 290}, 35, 2, RED);
 
-    DrawRectangleRounded({180, 260, 60, 60}, 1, 10, lightGreen); // down arrow
+    DrawRectangleRounded({180, 260, 60, 60}, 1, 10, BLUE); // down arrow
     DrawLine(210, 320, 240, 290, WHITE);
     DrawLine(210, 320, 210, 260, WHITE);
     DrawLine(210, 320, 180, 290, WHITE);
-    DrawTextEx(font, "MOVE DOWN", {170, 340}, 25, 2, WHITE);
+    DrawTextEx(font, "MOVE DOWN", {170, 340}, 35, 2, RED);
 
     // Draw space button
-    DrawRectangleRounded({150, 340, 120, 60}, 1, 10, lightGreen);
-    DrawTextEx(font, "SPACE", {180, 350}, 25, 2, WHITE);
-    DrawTextEx(font, "RUSH DOWN", {160, 400}, 35, 2, WHITE);
+    DrawRectangleRounded({280, 180, 120, 60}, 1, 10, BLUE);
+    DrawTextEx(font, "SPACE", {310, 195}, 36, 2, WHITE);
+    DrawTextEx(font, "RUSH DOWN", {400, 200}, 32, 2, RED);
 }
 
 int main()
@@ -114,7 +114,6 @@ int main()
     SetTargetFPS(60);
 
     Font font = LoadFontEx("Font\\ttf\\houston-sport-houston-sport-regular-400.ttf", 70, 0, 0);
-    Font font1 = LoadFontEx("Font\arial-unicode-ms.ttf", 70, 0, 0);
 
     Game game = Game();
 
@@ -149,14 +148,14 @@ int main()
         case GAME_OVER:
             DrawTextEx(font, "GAME OVER", {340, 555}, 45, 2, BLUE);
             DrawTextEx(font, "Press ENTER to Replay", {250, 620 - 150}, 30, 2, RED);
-            DrawTextEx(font, "Press BACKSPACE to Return", {200, 620 - 100}, 30, 2, RED);
+            DrawTextEx(font, "Press E to Return", {200, 620 - 100}, 30, 2, RED);
 
             if (IsKeyPressed(KEY_ENTER))
             {
                 game.Reset();
                 currentMenuState = PLAYING;
             }
-            else if (IsKeyPressed(KEY_BACKSPACE))
+            else if (IsKeyPressed(KEY_E))
             {
                 currentMenuState = MAIN_MENU;
             }
@@ -164,13 +163,13 @@ int main()
 
         case CREDITS:
             DrawCreditsMenu(font);
-            if (IsKeyPressed(KEY_BACKSPACE))
+            if (IsKeyPressed(KEY_E))
                 currentMenuState = MAIN_MENU;
             break;
 
         case INSTRUCTIONS:
             DrawInstructionsMenu(font);
-            if (IsKeyPressed(KEY_BACKSPACE))
+            if (IsKeyPressed(KEY_E))
                 currentMenuState = MAIN_MENU;
             break;
         }

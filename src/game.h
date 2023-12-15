@@ -16,7 +16,6 @@ public:
     void Reset();
 
 private:
-    void MoveBlockToBottom(int &);
     void MoveBlockLeft();
     void MoveBlockRight();
     Block GetRandomBlock();
