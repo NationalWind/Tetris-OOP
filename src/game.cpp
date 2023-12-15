@@ -87,7 +87,7 @@ void Game::HandleInput()
         RotateBlock();
         break;
     case KEY_ESCAPE:
-        exit(0);
+        CloseWindow();
         break;
     }
 }
