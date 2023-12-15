@@ -35,6 +35,11 @@ void DrawMainMenu(Font font)
     // Adjusted rectangle dimensions
     DrawRectangleRounded({80, 330, 340, 80}, 1, 10, lightGreen);
     DrawTextEx(font, "Press ESC to Quit", {135, 345}, 45, 2, WHITE);
+
+    DrawTriangle((Vector2){100, 200}, (Vector2){50, 400}, (Vector2){300, 400}, RED); // Up arrow
+    // DrawTriangle((Vector2){screenWidth / 2, screenHeight * 3 / 4}, (Vector2){screenWidth / 2 - 50, screenHeight * 3 / 4 - 50}, (Vector2){screenWidth / 2 + 50, screenHeight * 3 / 4 - 50}, BLUE);   // Down arrow
+    // DrawTriangle((Vector2){screenWidth / 4, screenHeight / 2}, (Vector2){screenWidth / 4 - 50, screenHeight / 2 - 50}, (Vector2){screenWidth / 4 - 50, screenHeight / 2 + 50}, GREEN);              // Left arrow
+    // DrawTriangle((Vector2){screenWidth * 3 / 4, screenHeight / 2}, (Vector2){screenWidth * 3 / 4 + 50, screenHeight / 2 - 50}, (Vector2){screenWidth * 3 / 4 + 50, screenHeight / 2 + 50}, ORANGE); // Right arrow
 }
 
 int main()
@@ -43,6 +48,7 @@ int main()
     SetTargetFPS(60);
 
     Font font = LoadFontEx("Font\\ttf\\houston-sport-houston-sport-regular-400.ttf", 70, 0, 0);
+    Font font1 = LoadFontEx("Font\arial-unicode-ms.ttf", 70, 0, 0);
 
     Game game = Game();
 
@@ -70,6 +76,9 @@ int main()
             break;
 
         case GAME_OVER:
+            // Your existing code for displaying "GAME OVER"
+            DrawTextEx(font, "GAME OVER", {339, 539}, 45, 2, BLUE);
+
             if (IsKeyPressed(KEY_ENTER))
             {
                 game.Reset();
@@ -92,13 +101,10 @@ int main()
             DrawTextEx(font, "Score", {365, 125}, 38, 2, DARKBROWN);
             DrawTextEx(font, "Next", {370, 400}, 38, 2, DARKGREEN);
             DrawTextEx(font, "Group 13 - 22CLC10", {320, 10}, 32, 2, magenta);
-            if (currentMenuState == GAME_OVER)
-            {
-                DrawTextEx(font, "GAME OVER", {340, 555}, 45, 2, BLUE);
-            }
             DrawRectangleRounded({320, 55, 170, 60}, 0.3, 6, lightGreen);
             DrawTextEx(font, "Press the ESC ", {335, 480}, 35, 2, RED);
             DrawTextEx(font, "key to exit. ", {345, 510}, 35, 2, RED);
+
             char scoreText[10];
             sprintf(scoreText, "%d", game.score);
             Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2);
