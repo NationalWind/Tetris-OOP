@@ -7,7 +7,9 @@ enum MenuState
 {
     MAIN_MENU,
     PLAYING,
-    GAME_OVER
+    GAME_OVER,
+    CREDITS,
+    INSTRUCTIONS
 };
 
 double lastUpdateTime = 0;
@@ -28,18 +30,82 @@ void DrawMainMenu(Font font)
 {
     DrawTextEx(font, "Tetris Game", {110, 100}, 100, 2, DARKBROWN);
 
-    // Adjusted rectangle dimensions
+    // Press ESC to Exit box
+    DrawRectangleRounded({10, 10, 200, 50}, 1, 10, PINK);
+    DrawTextEx(font, "Press ESC to Exit", {20, 20}, 25, 2, DARKGRAY);
+
+    // Play option
     DrawRectangleRounded({80, 230, 340, 80}, 1, 10, lightGreen);
     DrawTextEx(font, "Press ENTER to Play", {135, 245}, 45, 2, WHITE);
 
-    // Adjusted rectangle dimensions
+    // Credits option
     DrawRectangleRounded({80, 330, 340, 80}, 1, 10, lightGreen);
-    DrawTextEx(font, "Press ESC to Quit", {135, 345}, 45, 2, WHITE);
+    DrawTextEx(font, "Press C for Credits", {135, 345}, 45, 2, WHITE);
 
-    DrawTriangle((Vector2){100, 200}, (Vector2){50, 400}, (Vector2){300, 400}, RED); // Up arrow
-    // DrawTriangle((Vector2){screenWidth / 2, screenHeight * 3 / 4}, (Vector2){screenWidth / 2 - 50, screenHeight * 3 / 4 - 50}, (Vector2){screenWidth / 2 + 50, screenHeight * 3 / 4 - 50}, BLUE);   // Down arrow
-    // DrawTriangle((Vector2){screenWidth / 4, screenHeight / 2}, (Vector2){screenWidth / 4 - 50, screenHeight / 2 - 50}, (Vector2){screenWidth / 4 - 50, screenHeight / 2 + 50}, GREEN);              // Left arrow
-    // DrawTriangle((Vector2){screenWidth * 3 / 4, screenHeight / 2}, (Vector2){screenWidth * 3 / 4 + 50, screenHeight / 2 - 50}, (Vector2){screenWidth * 3 / 4 + 50, screenHeight / 2 + 50}, ORANGE); // Right arrow
+    // Instructions option
+    DrawRectangleRounded({80, 430, 340, 80}, 1, 10, lightGreen);
+    DrawTextEx(font, "Press I for Instructions", {105, 445}, 45, 2, WHITE);
+}
+
+void DrawCreditsMenu(Font font)
+{
+    // Press ESC to Exit box
+    DrawRectangleRounded({10, 10, 250, 50}, 1, 10, PINK);
+    DrawTextEx(font, "Press BACKSPACE to Return", {20, 20}, 25, 2, DARKGRAY);
+
+    DrawTextEx(font, "Credits", {170, 80}, 70, 2, DARKBROWN);
+
+    // Developed by
+    DrawTextEx(font, "Developed by Group 13", {100, 150}, 45, 2, WHITE);
+
+    // Individual credits
+    DrawTextEx(font, "22127327 - Tran Quoc Phong", {100, 210}, 45, 2, WHITE);
+    DrawTextEx(font, "22127411 - Le Thi Thanh Thuy", {100, 270}, 45, 2, WHITE);
+    DrawTextEx(font, "22127461 - Dang Nguyen Vu", {100, 330}, 45, 2, WHITE);
+    DrawTextEx(font, "22127468 - Tran Thi My Y", {100, 390}, 45, 2, WHITE);
+
+    // Special thanks
+    DrawTextEx(font, "Special thanks to all the teachers", {20, 450}, 45, 2, WHITE);
+    // Add more credit information as needed
+}
+
+void DrawInstructionsMenu(Font font)
+{
+    // Press ESC to Exit box
+    DrawRectangleRounded({10, 10, 250, 50}, 1, 10, PINK);
+    DrawTextEx(font, "Press BACKSPACE to Return", {30, 20}, 25, 2, DARKGRAY);
+
+    DrawTextEx(font, "Instructions", {120, 80}, 60, 2, DARKBROWN);
+
+    // Draw arrow boxes
+    DrawRectangleRounded({180, 180, 60, 60}, 1, 10, lightGreen); // up arrow
+    DrawLine(210, 180, 180, 210, WHITE);
+    DrawLine(210, 180, 210, 240, WHITE);
+    DrawLine(210, 180, 240, 210, WHITE);
+    DrawTextEx(font, "ROTATE BLOCK", {160, 160}, 25, 2, WHITE);
+
+    DrawRectangleRounded({120, 260, 60, 60}, 1, 10, lightGreen); // left arrow
+    DrawLine(120, 290, 150, 260, WHITE);
+    DrawLine(120, 290, 210, 290, WHITE);
+    DrawLine(120, 290, 150, 320, WHITE);
+    DrawTextEx(font, "MOVE LEFT", {20, 290}, 25, 2, WHITE);
+
+    DrawRectangleRounded({240, 260, 60, 60}, 1, 10, lightGreen); // right arrow
+    DrawLine(290, 290, 260, 260, WHITE);
+    DrawLine(290, 290, 230, 290, WHITE);
+    DrawLine(290, 290, 260, 320, WHITE);
+    DrawTextEx(font, "MOVE RIGHT", {300, 290}, 25, 2, WHITE);
+
+    DrawRectangleRounded({180, 260, 60, 60}, 1, 10, lightGreen); // down arrow
+    DrawLine(210, 320, 240, 290, WHITE);
+    DrawLine(210, 320, 210, 260, WHITE);
+    DrawLine(210, 320, 180, 290, WHITE);
+    DrawTextEx(font, "MOVE DOWN", {170, 340}, 25, 2, WHITE);
+
+    // Draw space button
+    DrawRectangleRounded({150, 340, 120, 60}, 1, 10, lightGreen);
+    DrawTextEx(font, "SPACE", {180, 350}, 25, 2, WHITE);
+    DrawTextEx(font, "RUSH DOWN", {160, 400}, 35, 2, WHITE);
 }
 
 int main()
@@ -56,10 +122,15 @@ int main()
     {
         switch (currentMenuState)
         {
+        // Inside your main loop, modify the MAIN_MENU case
         case MAIN_MENU:
             if (IsKeyPressed(KEY_ENTER))
                 currentMenuState = PLAYING;
-            if (IsKeyPressed(KEY_ESCAPE))
+            else if (IsKeyPressed(KEY_C))
+                currentMenuState = CREDITS;
+            else if (IsKeyPressed(KEY_I))
+                currentMenuState = INSTRUCTIONS;
+            else if (IsKeyPressed(KEY_ESCAPE))
                 CloseWindow();
             break;
 
@@ -76,16 +147,31 @@ int main()
             break;
 
         case GAME_OVER:
-            // Your existing code for displaying "GAME OVER"
-            DrawTextEx(font, "GAME OVER", {339, 539}, 45, 2, BLUE);
+            DrawTextEx(font, "GAME OVER", {340, 555}, 45, 2, BLUE);
+            DrawTextEx(font, "Press ENTER to Replay", {250, 620 - 150}, 30, 2, RED);
+            DrawTextEx(font, "Press BACKSPACE to Return", {200, 620 - 100}, 30, 2, RED);
 
             if (IsKeyPressed(KEY_ENTER))
             {
                 game.Reset();
                 currentMenuState = PLAYING;
             }
-            if (IsKeyPressed(KEY_ESCAPE))
-                CloseWindow();
+            else if (IsKeyPressed(KEY_BACKSPACE))
+            {
+                currentMenuState = MAIN_MENU;
+            }
+            break;
+
+        case CREDITS:
+            DrawCreditsMenu(font);
+            if (IsKeyPressed(KEY_BACKSPACE))
+                currentMenuState = MAIN_MENU;
+            break;
+
+        case INSTRUCTIONS:
+            DrawInstructionsMenu(font);
+            if (IsKeyPressed(KEY_BACKSPACE))
+                currentMenuState = MAIN_MENU;
             break;
         }
 
@@ -96,7 +182,7 @@ int main()
         {
             DrawMainMenu(font);
         }
-        else
+        else if (currentMenuState == PLAYING)
         {
             DrawTextEx(font, "Score", {365, 125}, 38, 2, DARKBROWN);
             DrawTextEx(font, "Next", {370, 400}, 38, 2, DARKGREEN);
