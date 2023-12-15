@@ -7,10 +7,10 @@ class Grid
 public:
     Grid();
     void Initialize();
-    void Print();
+    void PrintGrid();
     void Draw();
-    bool IsCellOutside(int row, int column);
-    bool IsCellEmpty(int row, int column);
+    bool IsCellOutside(int row, int col);
+    bool IsCellEmpty(int row, int col);
     int ClearFullRows();
     int grid[20][10];
 

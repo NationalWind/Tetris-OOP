@@ -22,7 +22,7 @@ void Grid::Initialize()
     }
 }
 
-void Grid::Print()
+void Grid::PrintGrid()
 {
     for (int row = 0; row < numRows; row++)
     {

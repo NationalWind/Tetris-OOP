@@ -59,7 +59,7 @@ void Game::Draw()
     }
 }
 
-void Game::HandleInput()
+void Game::ProcessInput()
 {
     int keyPressed = GetKeyPressed();
     if (gameOver && keyPressed != 0)
@@ -135,7 +135,7 @@ bool Game::IsBlockOutside()
     std::vector<Position> tiles = currentBlock.GetCellPositions();
     for (Position item : tiles)
     {
-        if (grid.IsCellOutside(item.row, item.column))
+        if (grid.IsCellOutside(item.row, item.col))
         {
             return true;
         }
@@ -164,7 +164,7 @@ void Game::LockBlock()
     std::vector<Position> tiles = currentBlock.GetCellPositions();
     for (Position item : tiles)
     {
-        grid.grid[item.row][item.column] = currentBlock.id;
+        grid.grid[item.row][item.col] = currentBlock.id;
     }
     currentBlock = nextBlock;
     if (BlockFits() == false)
@@ -185,7 +185,7 @@ bool Game::BlockFits()
     std::vector<Position> tiles = currentBlock.GetCellPositions();
     for (Position item : tiles)
     {
-        if (grid.IsCellEmpty(item.row, item.column) == false)
+        if (grid.IsCellEmpty(item.row, item.col) == false)
         {
             return false;
         }

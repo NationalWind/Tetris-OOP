@@ -135,7 +135,7 @@ int main()
 
         case PLAYING:
             UpdateMusicStream(game.music);
-            game.HandleInput();
+            game.ProcessInput();
             if (EventTriggered(0.2))
             {
                 game.MoveBlockDown();
@@ -146,9 +146,9 @@ int main()
             break;
 
         case GAME_OVER:
-            DrawTextEx(font, "GAME OVER", {340, 555}, 45, 2, BLUE);
-            DrawTextEx(font, "Press ENTER to Replay", {250, 620 - 150}, 30, 2, RED);
-            DrawTextEx(font, "Press E to Return", {200, 620 - 100}, 30, 2, RED);
+            DrawTextEx(font, "GAME OVER", {110, 100}, 100, 2, BLUE);
+            DrawTextEx(font, "Press ENTER to Replay", {250, 620 - 150}, 35, 2, RED);
+            DrawTextEx(font, "Press E to Return", {250, 620 - 100}, 35, 2, RED);
 
             if (IsKeyPressed(KEY_ENTER))
             {

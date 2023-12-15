@@ -8,7 +8,7 @@ public:
     Game();
     ~Game();
     void Draw();
-    void HandleInput();
+    void ProcessInput();
     void MoveBlockDown();
     bool gameOver;
     int score;
