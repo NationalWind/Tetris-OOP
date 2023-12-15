@@ -10,10 +10,10 @@ public:
     void Draw();
     void ProcessInput();
     void MoveBlockDown();
-    bool gameOver;
+    bool IsGameOver;
     int score;
     Music music;
-    void Reset();
+    void ResetGame();
 
 private:
     void MoveBlockLeft();
@@ -26,7 +26,7 @@ private:
     bool BlockFits();
     void MoveBlockDownFast();
 
-    void UpdateScore(int linesCleared, int moveDownPoints);
+    void UpdateGameScore(int linesCleared, int moveDownPoints);
     Grid grid;
     std::vector<Block> blocks;
     Block currentBlock;

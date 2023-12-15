@@ -7,7 +7,7 @@ Game::Game()
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
-    gameOver = false;
+    IsGameOver = false;
     score = 0;
     InitAudioDevice();
     music = LoadMusicStream("Sounds/background_music.mp3");
@@ -38,7 +38,7 @@ Block Game::GetRandomBlock()
 
 std::vector<Block> Game::GetAllBlocks()
 {
-    return {IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()};
+    return {Block_I(), Block_J(), Block_L(), Block_O(), Block_S(), Block_T(), Block_Z()};
 }
 
 void Game::Draw()
@@ -62,10 +62,10 @@ void Game::Draw()
 void Game::ProcessInput()
 {
     int keyPressed = GetKeyPressed();
-    if (gameOver && keyPressed != 0)
+    if (IsGameOver && keyPressed != 0)
     {
-        gameOver = false;
-        Reset();
+        IsGameOver = false;
+        ResetGame();
     }
 
     switch (keyPressed)
@@ -82,7 +82,7 @@ void Game::ProcessInput()
         break;
     case KEY_DOWN:
         MoveBlockDown();
-        UpdateScore(0, 5);
+        UpdateGameScore(0, 5);
         break;
     case KEY_UP:
         RotateBlock();
@@ -95,7 +95,7 @@ void Game::ProcessInput()
 
 void Game::MoveBlockLeft()
 {
-    if (!gameOver)
+    if (!IsGameOver)
     {
         currentBlock.Move(0, -1);
         if (IsBlockOutside() || BlockFits() == false)
@@ -107,7 +107,7 @@ void Game::MoveBlockLeft()
 
 void Game::MoveBlockRight()
 {
-    if (!gameOver)
+    if (!IsGameOver)
     {
         currentBlock.Move(0, 1);
         if (IsBlockOutside() || BlockFits() == false)
@@ -119,7 +119,7 @@ void Game::MoveBlockRight()
 
 void Game::MoveBlockDown()
 {
-    if (!gameOver)
+    if (!IsGameOver)
     {
         currentBlock.Move(1, 0);
         if (IsBlockOutside() || BlockFits() == false)
@@ -145,7 +145,7 @@ bool Game::IsBlockOutside()
 
 void Game::RotateBlock()
 {
-    if (!gameOver)
+    if (!IsGameOver)
     {
         currentBlock.Rotate();
         if (IsBlockOutside() || BlockFits() == false)
@@ -169,14 +169,14 @@ void Game::LockBlock()
     currentBlock = nextBlock;
     if (BlockFits() == false)
     {
-        gameOver = true;
+        IsGameOver = true;
     }
     nextBlock = GetRandomBlock();
     int rowsCleared = grid.ClearFullRows();
     if (rowsCleared > 0)
     {
         PlaySound(clearSound);
-        UpdateScore(rowsCleared, 0);
+        UpdateGameScore(rowsCleared, 0);
     }
 }
 
@@ -195,13 +195,13 @@ bool Game::BlockFits()
 
 void Game::MoveBlockDownFast()
 {
-    if (!gameOver)
+    if (!IsGameOver)
     {
         // Move the block down rapidly
         while (!IsBlockOutside() && BlockFits())
         {
             currentBlock.Move(1, 0);
-            UpdateScore(0, 2); // Increase the score more for rapid descent
+            UpdateGameScore(0, 2); // Increase the score more for rapid descent
         }
 
         // Move the block up by one to lock it in place
@@ -210,17 +210,17 @@ void Game::MoveBlockDownFast()
     }
 }
 
-void Game::Reset()
+void Game::ResetGame()
 {
     grid.Initialize();
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
-    gameOver = false;
+    IsGameOver = false;
     score = 0;
 }
 
-void Game::UpdateScore(int linesCleared, int moveDownPoints)
+void Game::UpdateGameScore(int linesCleared, int moveDownPoints)
 {
     switch (linesCleared)
     {

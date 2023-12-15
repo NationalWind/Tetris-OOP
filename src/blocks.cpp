@@ -1,10 +1,10 @@
 #include "block.h"
 #include "position.h"
 
-class LBlock : public Block
+class Block_L : public Block
 {
 public:
-    LBlock()
+    Block_L()
     {
         id = 1;
         cells[0] = {Position(0, 2), Position(1, 0), Position(1, 1), Position(1, 2)};
@@ -15,10 +15,10 @@ public:
     }
 };
 
-class JBlock : public Block
+class Block_J : public Block
 {
 public:
-    JBlock()
+    Block_J()
     {
         id = 2;
         cells[0] = {Position(0, 0), Position(1, 0), Position(1, 1), Position(1, 2)};
@@ -29,10 +29,10 @@ public:
     }
 };
 
-class IBlock : public Block
+class Block_I : public Block
 {
 public:
-    IBlock()
+    Block_I()
     {
         id = 3;
         cells[0] = {Position(1, 0), Position(1, 1), Position(1, 2), Position(1, 3)};
@@ -43,10 +43,10 @@ public:
     }
 };
 
-class OBlock : public Block
+class Block_O : public Block
 {
 public:
-    OBlock()
+    Block_O()
     {
         id = 4;
         cells[0] = {Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1)};
@@ -54,10 +54,10 @@ public:
     }
 };
 
-class SBlock : public Block
+class Block_S : public Block
 {
 public:
-    SBlock()
+    Block_S()
     {
         id = 5;
         cells[0] = {Position(0, 1), Position(0, 2), Position(1, 0), Position(1, 1)};
@@ -68,10 +68,10 @@ public:
     }
 };
 
-class TBlock : public Block
+class Block_T : public Block
 {
 public:
-    TBlock()
+    Block_T()
     {
         id = 6;
         cells[0] = {Position(0, 1), Position(1, 0), Position(1, 1), Position(1, 2)};
@@ -82,10 +82,10 @@ public:
     }
 };
 
-class ZBlock : public Block
+class Block_Z : public Block
 {
 public:
-    ZBlock()
+    Block_Z()
     {
         id = 7;
         cells[0] = {Position(0, 0), Position(0, 1), Position(1, 1), Position(1, 2)};

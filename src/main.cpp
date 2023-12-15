@@ -141,7 +141,7 @@ int main()
                 game.MoveBlockDown();
             }
 
-            if (game.gameOver)
+            if (game.IsGameOver)
                 currentMenuState = GAME_OVER;
             break;
 
@@ -152,7 +152,7 @@ int main()
 
             if (IsKeyPressed(KEY_ENTER))
             {
-                game.Reset();
+                game.ResetGame();
                 currentMenuState = PLAYING;
             }
             else if (IsKeyPressed(KEY_E))
